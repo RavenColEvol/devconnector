@@ -18,7 +18,7 @@ router.post('/', userValidationRules(), validate, async (req, res) => {
         let user = await User.findOne({ email });
 
         if (user) {
-            return res.status(422).json({ errors: [{ 'email': 'Email is already taken.' }] });
+            return res.status(422).json({ errors: [{ 'msg': 'Email is already taken.' }] });
         }
 
         const avatar = gravatar.url(email, {

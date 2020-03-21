@@ -16,11 +16,8 @@ const commentRules = () => [
 const Validator = (req, res, next) => {
     const errors = validationResult(req);
 
-    if (!errors.isEmpty()) {
-        const extractedErrors = []
-        errors.array().map(error => extractedErrors.push({ [error.param]: error.msg }))
-        return res.status(422).json({ errors: extractedErrors })
-    }
+    if (!errors.isEmpty())
+        return res.status(422).json({ errors: errors.array() })
     return next();
 }
 

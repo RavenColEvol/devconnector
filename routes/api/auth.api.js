@@ -40,7 +40,7 @@ router.post('/', authRules(), authValidator, async (req, res) => {
         if(!isMatch) {
             return res
                     .status(422)
-                    .json({msg: 'Invalid Credentials'})
+                    .json({ errors: [{ msg: 'Invalid Credentials.' }] })
         }
 
         const payload = {
