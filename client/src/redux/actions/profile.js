@@ -5,6 +5,9 @@ import {
     GET_PROFILE,
     PROFILE_ERROR,
     UPDATE_PROFILE,
+    DELETE_PROFILE,
+    CLEAR_PROFILE,
+    LOGOUT,
 } from './types'
 
 
@@ -159,6 +162,36 @@ export const deleteEducation = (edu_id) => async dispatch => {
         })
         dispatch(setAlert('Education Deleted.','success'));
     } catch (err) {
+        const errors = err.response.data.errors;
+        
+        if(errors) {
+            errors.forEach(error => {
+                dispatch(setAlert(error.msg, 'danger'));
+            });
+        }
+
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: {msg: err.response.statusText,status:err.response.status}
+        });
+    }
+}
+
+export const deleteProfile = () => async dispatch => {
+    try {
+        if(window.confirm('Do you really want to delete your Account ?')) {
+            await axios.delete('/api/profile');
+            dispatch({
+                type: DELETE_PROFILE
+            })
+            dispatch({
+                type: CLEAR_PROFILE
+            })
+            dispatch({
+                type: LOGOUT
+            })
+        }
+    } catch(err) {
         const errors = err.response.data.errors;
         
         if(errors) {

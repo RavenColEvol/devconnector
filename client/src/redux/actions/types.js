@@ -9,6 +9,7 @@ export const LOGOUT = 'LOGOUT'
 export const GET_PROFILE = 'GET_PROFILE'
 export const PROFILE_ERROR = 'PROFILE_ERROR'
 export const UPDATE_PROFILE = 'UPDATE_PROFILE'
+export const DELETE_PROFILE = 'DELETE_PROFILE'
 
 
 export const USER_LOADED = 'USER_LOADED'
